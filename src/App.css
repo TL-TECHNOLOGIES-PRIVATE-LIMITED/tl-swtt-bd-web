@@ -90,3 +90,7 @@ label{
   transform: translate(-50%, -50%);
   z-index: 9999; /* Ensure it stays above other content */
 }
+
+.tr-tp-4{
+  padding-top: 0.4rem !important;
+}

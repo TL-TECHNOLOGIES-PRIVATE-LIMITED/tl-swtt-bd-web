@@ -8,129 +8,149 @@ import { FaRobot } from "react-icons/fa";
 
 export const faqData = [
   {
-    question: "What types of tour packages do you offer?",
-    answer: "We offer a wide range of packages, including cultural, adventure, eco-tourism, and cruise options to showcase the beauty of Kerala and beyond.",
-    keywords: ["tour packages", "cultural tours", "adventure tours", "eco-tourism", "cruise options", "Kerala travel"]
+    question: "What services does SkyWorld offer?",
+    answer: "We provide airline ticket bookings, visa services, tour packages, and job placement assistance.",
+    keywords: ["services", "SkyWorld", "airline ticket bookings", "visa services", "tour packages", "job placement assistance"]
   },
   {
-    question: "Do your packages include food?",
-    answer: "Yes! Our packages include delicious local and international cuisine to give you a taste of Kerala’s rich flavors.",
-    keywords: ["food included", "meals", "cuisine", "Kerala flavors", "local food"]
+    question: "Where is SkyWorld located?",
+    answer: "We are based in [insert location], but our services are available globally.",
+    keywords: ["location", "SkyWorld", "global services"]
   },
   {
-    question: "What types of accommodations do you provide?",
-    answer: "We offer everything from cozy guest houses to luxurious resorts, ensuring comfort and relaxation throughout your stay.",
-    keywords: ["accommodations", "guest houses", "resorts", "comfort", "luxury stay"]
+    question: "How can I contact SkyWorld?",
+    answer: "You can reach us at +91 9446004261 or via email at [insert email address].",
+    keywords: ["contact", "SkyWorld", "phone number", "email"]
   },
   {
-    question: "What adventure activities do you have available?",
-    answer: "We offer trekking, cycling, water sports, and more! Each activity is designed to immerse you in the beauty of nature.",
-    keywords: ["adventure activities", "trekking", "cycling", "water sports", "outdoor"]
+    question: "What are your office hours?",
+    answer: "Our office hours are Monday to Saturday, 9:00 AM to 7:00 PM.",
+    keywords: ["office hours", "SkyWorld"]
   },
   {
-    question: "What types of vehicles can I choose for my trip?",
-    answer: "We offer hatchbacks, sedans, SUVs, Tempo Travellers, mini buses, and luxury buses to accommodate groups of any size.",
-    keywords: ["vehicle options", "transportation", "SUVs", "mini buses", "luxury buses"]
+    question: "Does SkyWorld guarantee job placements?",
+    answer: "While we strive to connect you with the best opportunities, final placement decisions depend on the employer.",
+    keywords: ["job placements", "SkyWorld", "employer"]
   },
   {
-    question: "Are guided tours available?",
-    answer: "Absolutely! Our experienced guides provide insightful and fun tours to ensure a memorable experience.",
-    keywords: ["guided tours", "tour guide", "insightful tours", "memorable experience"]
+    question: "What types of jobs do you offer?",
+    answer: "We offer jobs in restaurants, supermarkets, construction, healthcare, and more.",
+    keywords: ["job types", "SkyWorld", "restaurants", "supermarkets", "construction", "healthcare"]
   },
   {
-    question: "Do you have cruise packages?",
-    answer: "Yes, we offer relaxing and scenic cruise packages to enjoy Kerala’s waterways and coastal beauty.",
-    keywords: ["cruise packages", "waterways", "coastal beauty", "scenic cruise"]
+    question: "What is included in the 60,000 INR package?",
+    answer: "The package includes visa processing, airfare, and service fees.",
+    keywords: ["60,000 INR package", "visa processing", "airfare", "service fees"]
   },
   {
-    question: "What eco-tourism experiences do you offer?",
-    answer: "We provide eco-friendly tours focusing on Kerala’s natural landscapes, including wildlife reserves, nature hikes, and more.",
-    keywords: ["eco-tourism", "wildlife reserves", "nature hikes", "eco-friendly tours"]
+    question: "How long does it take to process the visa?",
+    answer: "Typically, visa processing takes 7-10 working days.",
+    keywords: ["visa processing", "time", "SkyWorld"]
   },
   {
-    question: "Do you cater to large groups?",
-    answer: "Yes, we cater to groups, families, colleges, and friends, providing tailored itineraries and transportation options.",
-    keywords: ["large groups", "group tours", "family-friendly","college", "tailored itineraries"]
+    question: "Can I choose the job I want to apply for?",
+    answer: "Yes, you can select from available positions that match your skills.",
+    keywords: ["choose job", "apply", "SkyWorld"]
   },
   {
-    question: "Can I book a massage or beauty treatment during my stay?",
-    answer: "Certainly! We offer relaxing massage and beauty treatments to enhance your travel experience.",
-    keywords: ["massage", "beauty treatment", "relaxation", "spa services"]
+    question: "Is accommodation provided for jobs in Dubai?",
+    answer: "Accommodation depends on the employer. Please check the job details for specifics.",
+    keywords: ["accommodation", "jobs in Dubai", "employer"]
   },
   {
-    question: "Are your tours suitable for families?",
-    answer: "Yes, we have family-friendly packages with activities suitable for all ages, ensuring a memorable trip for everyone.",
-    keywords: ["family-friendly", "suitable for all ages", "family tours", "activities for kids"]
+    question: "What documents are required for visa processing?",
+    answer: "A valid passport, recent passport-sized photos, and any job-specific documents.",
+    keywords: ["visa processing", "documents", "SkyWorld"]
   },
   {
-    question: "Do you offer airport pickup and drop-off?",
-    answer: "Yes, we provide convenient airport transfer services for a smooth start and end to your journey.",
-    keywords: ["airport pickup", "drop-off", "airport transfer", "travel convenience"]
+    question: "Can SkyWorld help with visa extensions?",
+    answer: "Yes, we assist with visa extensions based on your needs.",
+    keywords: ["visa extensions", "SkyWorld"]
   },
   {
-    question: "Can I rent a luxury bus for my group?",
-    answer: "Absolutely! We offer luxury bus rentals for groups with comfortable seating, air conditioning, and entertainment options.",
-    keywords: ["luxury bus rental", "group transport", "comfortable seating", "bus amenities"]
+    question: "What happens if my visa application is rejected?",
+    answer: "We will guide you on reapplying or exploring alternative options.",
+    keywords: ["visa application", "rejected", "SkyWorld"]
   },
   {
-    question: "Do you cater to international travelers?",
-    answer: "Yes, we welcome international guests and provide personalized experiences for a seamless travel experience in Kerala.",
-    keywords: ["international travelers", "foreign guests", "personalized experiences", "Kerala travel"]
+    question: "Do you provide airfare discounts?",
+    answer: "Yes, we offer competitive rates on airline tickets as part of our services.",
+    keywords: ["airfare discounts", "SkyWorld"]
   },
   {
-    question: "Do you offer wildlife tours?",
-    answer: "Yes, our wildlife tours take you to some of Kerala’s best nature reserves and parks to experience local flora and fauna.",
-    keywords: ["wildlife tours", "nature reserves", "flora and fauna", "wildlife experience"]
-  },
-  {
-    question: "Do your packages include travel insurance?",
-    answer: "We can arrange travel insurance upon request to ensure your peace of mind during the trip.",
-    keywords: ["travel insurance", "insurance coverage", "peace of mind"]
-  },
-  {
-    question: "Can I book a tour for a special occasion?",
-    answer: "Yes, we offer customizable packages for birthdays, anniversaries, and other celebrations.",
-    keywords: ["special occasion", "birthdays", "anniversaries", "custom packages"]
-  },
-  {
-    question: "Are your itineraries customizable?",
-    answer: "Yes, we can tailor our packages to meet your specific preferences and interests.",
-    keywords: ["customizable itineraries", "tailored packages", "personal preferences"]
+    question: "Is travel insurance included in the package?",
+    answer: "Travel insurance is optional and can be arranged upon request.",
+    keywords: ["travel insurance", "package", "SkyWorld"]
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept credit/debit cards, bank transfers, and other convenient payment methods. Just ask!",
-    keywords: ["payment methods", "credit card", "bank transfer", "payment options"]
+    answer: "We accept UPI, bank transfers, and major credit/debit cards.",
+    keywords: ["payment methods", "SkyWorld", "UPI", "bank transfers", "credit cards"]
   },
   {
-    question: "Do you offer any seasonal tours?",
-    answer: "Yes! We have special tours for monsoon, festival seasons, and more to highlight Kerala’s unique charm.",
-    keywords: ["seasonal tours", "monsoon", "festival season", "special tours"]
+    question: "Can I pay in installments?",
+    answer: "Yes, installment options are available for certain packages. Please contact us for details.",
+    keywords: ["installments", "payment", "SkyWorld"]
   },
   {
-    question: "Do you have packages for honeymooners?",
-    answer: "Yes, we offer romantic packages designed to create memorable experiences for couples.",
-    keywords: ["honeymoon packages", "romantic trips", "couples travel", "memorable experiences"]
+    question: "What is your refund policy?",
+    answer: "Refunds depend on the stage of processing. Contact us for detailed terms and conditions.",
+    keywords: ["refund policy", "SkyWorld"]
   },
   {
-    question: "What safety measures are in place due to COVID-19?",
-    answer: "We prioritize your safety with enhanced cleaning, sanitization, and social distancing practices throughout your trip.",
-    keywords: ["safety measures", "COVID-19", "sanitization", "social distancing"]
+    question: "Are there hidden charges in your packages?",
+    answer: "No, all charges are transparent and clearly mentioned in the package details.",
+    keywords: ["hidden charges", "packages", "SkyWorld"]
   },
   {
-    question: "What are the popular destinations in your packages?",
-    answer: "Our packages cover Kerala’s highlights, including Munnar, Alleppey, Kochi, Wayanad, and Kovalam, among others.",
-    keywords: ["popular destinations", "Kerala highlights", "Munnar", "Alleppey", "Kochi"]
+    question: "Do you provide invoices for payments?",
+    answer: "Yes, we provide invoices for all payments made to us.",
+    keywords: ["invoices", "payments", "SkyWorld"]
   },
   {
-    question: "How do I book/enquire about a package?",
-    answer: "You can book through our website at https://keraladrives.com  or fill out our enquiry form at https://enquiry.keraladrives.com to get started.",
-    keywords: ["book package", "enquiry", "booking", "online booking", "keraladrives.com"]
+    question: "Can SkyWorld help with group travel bookings?",
+    answer: "Absolutely! We provide customized packages for group travel.",
+    keywords: ["group travel", "SkyWorld"]
   },
   {
-    question: "How can I contact you for more details?",
-    answer: "You can reach us at +91 8086407979 or by email at info@keraladrives.com. We’re here to help with any questions!",
-    keywords: ["contact us", "customer support", "phone number", "email address"]
+    question: "Do you offer holiday packages?",
+    answer: "Yes, we have tour packages tailored for leisure and business travelers.",
+    keywords: ["holiday packages", "SkyWorld"]
+  },
+  {
+    question: "What countries do you offer visa services for?",
+    answer: "We currently provide visa services for the UAE and other GCC countries.",
+    keywords: ["visa services", "countries", "SkyWorld"]
+  },
+  {
+    question: "Can I track my visa application status?",
+    answer: "Yes, contact us to receive updates on your visa application status.",
+    keywords: ["track visa application", "SkyWorld"]
+  },
+  {
+    question: "Is there a support team available for emergencies?",
+    answer: "Yes, our support team is available 24/7 to assist with emergencies.",
+    keywords: ["support team", "emergencies", "SkyWorld"]
+  },
+  {
+    question: "What’s the processing time for a Dubai job visa?",
+    answer: "The processing time is 7-10 working days after submitting all required documents.",
+    keywords: ["Dubai job visa", "processing time", "SkyWorld"]
+  },
+  {
+    question: "Do you help with job applications?",
+    answer: "Yes, we assist with job applications and guide you throughout the process.",
+    keywords: ["job applications", "assistance", "SkyWorld"]
+  },
+  {
+    question: "Can I change my job after reaching Dubai?",
+    answer: "Job changes depend on your employment contract and visa terms. Please consult your employer or contact us for guidance.",
+    keywords: ["job change", "Dubai", "employment contract", "SkyWorld"]
+  },
+  {
+    question: "How do I make a payment?",
+    answer: "You can pay via UPI, bank transfer, or credit/debit card. For details, contact us at +91 9446004261.",
+    keywords: ["payment", "methods", "SkyWorld"]
   }
 ];
 
@@ -182,11 +202,11 @@ const TypingIndicator = () => (
 // New FAQ Suggestions component
 const FAQSuggestions = ({ onQuestionClick }) => {
   const suggestedQuestions = [
-    "What types of tour packages do you offer?",
-    "What are the popular destinations in your packages?",
-    "Do your packages include food?",
-    "What types of accommodations do you provide?",
-    "Do you have packages for honeymooners?"
+    "What services does SkyWorld offer?",
+    "Where is SkyWorld located?",
+    "How can I contact SkyWorld?",
+    "What are your office hours?",
+    "Does SkyWorld guarantee job placements?"
   ];
 
   return (
@@ -209,7 +229,7 @@ const ChatBotModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([{ 
     id: 1, 
-    text: "Hello! I'm your Kerala Drives assistant. How can I help you plan your trip? Feel free to ask me anything or choose from the suggestions below.", 
+    text: "Hello! I'm your Sky World assistant. How can I help you plan your trip? Feel free to ask me anything or choose from the suggestions below.", 
     isBot: true 
   }]);
   const [inputText, setInputText] = useState('');
@@ -319,7 +339,7 @@ const ChatBotModal = () => {
 
             <div className="bg-blue-600 text-white px-4 py-3 flex items-center">
               <FaRobot className="mr-2 text-xl" />
-              <h1 className="text-xl font-semibold">Kerala Drives Assistant</h1>
+              <h1 className="text-xl font-semibold">SkyWorldAssist</h1>
             </div>
 
             <div className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">

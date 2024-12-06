@@ -14,7 +14,18 @@ import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import mapIcon from '../../assets/mapIcon.svg';
 import CustomAlert from '../alert/CustomAlert';
+import CountrySelector from './CountrySelector';
 
+const servicesOptions = [
+  "Airline Ticket Booking",
+  "Visa Processing Services",
+  "Tour Packages",
+  "Job Placement Assistance",
+  "Travel Insurance",
+  "Accommodation Arrangements",
+  "24/7 Travel Support",
+  "Transportation Services"
+];
 
 const schema = yup.object().shape({
   name: yup
@@ -23,39 +34,25 @@ const schema = yup.object().shape({
     .min(2, 'Name must be at least 2 characters long')
     .max(50, 'Name must not exceed 50 characters'),
 
+  email: yup
+    .string()
+    .required('Email is required')
+    .email('Email is not valid'),
+
   phoneNumber: yup
     .string()
     .required('Phone number is required')
     .matches(/^\+?[1-9]\d{1,14}$/, 'Phone number is not valid'),
 
-  destination: yup
+  country: yup
     .string()
-    .required('Destination is required')
-    .min(3, 'Destination must be at least 3 characters long')
-    .max(100, 'Destination must not exceed 100 characters'),
+    .required('Country is required'),
 
-  numberOfPersons: yup
-    .number()
-    .required('Number of persons is required')
-    .typeError('Number of persons must be a number')
-    .positive('Number of persons must be greater than zero')
-    .integer('Number of persons must be an integer'),
+  typeOfTravel: yup
+    .string()
+    .required('Type of travel is required'),
 
-
-  fromDate: yup
-    .date()
-    .nullable() // Allow null values
-    .transform((value) => (value === '' ? null : value)) // Transform empty string to null
-    .required('From date is required')
-    .typeError('From date must be a valid date'),
-
-  toDate: yup
-    .date()
-    .nullable() // Allow null values
-    .transform((value) => (value === '' ? null : value)) // Transform empty string to null
-    .required('To date is required')
-    .min(yup.ref('fromDate'), "To date can't be before From date")
-    .typeError('To date must be a valid date'),
+  preferredServices: yup.array().min(1, 'At least one service must be selected').required('Preferred services are required'),
 
   message: yup.string().optional(),
 });
@@ -66,10 +63,23 @@ const ContactForm = () => {
 
   const [phone, setPhone] = useState('');
   const [showAlert, setShowAlert] = useState(false);
+  const [selectedServices, setSelectedServices] = useState([]);
   const message = watch('message', '');
   const fromDate = watch('fromDate');
   const toDate = watch('toDate');
 
+  const handleServiceChange = (event) => {
+    const value = event.target.value;
+    if (selectedServices.includes(value)) {
+      setSelectedServices(selectedServices.filter(service => service !== value));
+    } else {
+      setSelectedServices([...selectedServices, value]);
+    }
+  };
+
+  const removeService = (service) => {
+    setSelectedServices(selectedServices.filter(item => item !== service));
+  };
 
   const onSubmit = (data) => {
     setShowAlert(true); // Show alert on form submission
@@ -86,7 +96,7 @@ const ContactForm = () => {
       `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
       `📝 *Message :* ${data.message || 'No additional message'}\n\n`;
 
-    const url = `https://api.whatsapp.com/send?phone=918086407979&text=${encodeURIComponent(whatsappMessage)}`;
+    const url = `https://api.whatsapp.com/send?phone=917306555586&text=${encodeURIComponent(whatsappMessage)}`;
 
     // Show alert for 2 seconds, then open WhatsApp
     setTimeout(() => {
@@ -112,9 +122,24 @@ const ContactForm = () => {
               {...register('name')}
               placeholder='Enter your full name'
               className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              autoFocus
             />
             {errors.name && <p className='text-red-500 ps-4 text-[10px]'>{errors.name.message}</p>}
           </div>
+          <div>
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
+              <FaAsterisk className='text-red-500 text-sm pe-2' />Email
+              <TooltipButton content={<p>Provide your email address.</p>} />
+            </label>
+            <input
+              {...register('email')}
+              placeholder='Enter your email'
+              className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            />
+            {errors.email && <p className='text-red-500 ps-4 text-[10px]'>{errors.email.message}</p>}
+          </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
               <FaAsterisk className='text-red-500 text-sm pe-2' />Phone Number
@@ -134,7 +159,7 @@ const ContactForm = () => {
                   inputProps={{
                     name: 'phone',
                     required: true,
-                    autoFocus: true
+                    // autoFocus: true
                   }}
                   containerStyle={{ width: '100%', marginTop: '4px' }}
                   inputStyle={{ width: '100%', borderRadius: '9999px', fontFamily: '"Outfit", sans-serif', fontSize: "12px" }}
@@ -143,83 +168,99 @@ const ContactForm = () => {
             />
             {errors.phoneNumber && <p className='text-red-500 ps-4 text-[10px]'>{errors.phoneNumber.message}</p>}
           </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />Destination
-              <TooltipButton content={<p>Enter your desired travel destination.</p>} />
+              <FaAsterisk className='text-red-500 text-sm pe-2' />Country
+              <TooltipButton content={<p>Select your country.</p>} />
             </label>
-            <input
-              {...register('destination')}
-              placeholder='Enter destination'
-              className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            <Controller
+              name="country"
+              control={control}
+              render={({ field }) => (
+                <CountrySelector
+                  {...field}
+                  onChange={(value) => field.onChange(value)}
+                />
+              )}
             />
-            {errors.destination && <p className='text-red-500 ps-4 text-[10px]'>{errors.destination.message}</p>}
-          </div>
-          <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />Number of Travellers
-              <TooltipButton content={<p>Enter the number of people traveling.</p>} />
-            </label>
-            <input
-              type="number"
-              min={1}
-              {...register('numberOfPersons')}
-              placeholder='Enter number of travellers'
-              className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            />
-            {errors.numberOfPersons && <p className='text-red-500 ps-4 text-[10px]'>{errors.numberOfPersons.message}</p>}
+            {errors.country && <p className='text-red-500 ps-4 text-[10px]'>{errors.country.message}</p>}
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="gap-1 w-full flex items-center text-xs font-bold text-gray-700 ps-4">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />From Date
-              <TooltipButton content={<p>Select the start date of your trip.</p>} />
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4 tr-tp-4">
+              <FaAsterisk className='text-red-500 text-sm pe-2' />Type of Travel
+              <TooltipButton content={<p>Select your type of travel.</p>} />
             </label>
-            <Controller
-              name="fromDate"
-              control={control}
-              render={({ field }) => (
-                <ReactDatePicker
-                  {...field}
-                  selected={field.value}
-                  onChange={(date) => field.onChange(date)}
-                  minDate={today}
-                  dateFormat="dd-MM-yyyy"
-                  placeholderText="Select from date"
-                  className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                  wrapperClassName="w-full"
-                />
-              )}
-            />
-            {errors.fromDate && <p className='text-red-500 ps-4 text-[10px]'>{errors.fromDate.message}</p>}
+            <select {...register('typeOfTravel')} className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500">
+              <option value="">Select type of travel</option>
+              <option value="leisure">Leisure</option>
+              <option value="business">Business</option>
+              <option value="adventure">Adventure</option>
+            </select>
+            {errors.typeOfTravel && <p className='text-red-500 ps-4 text-[10px]'>{errors.typeOfTravel.message}</p>}
           </div>
-
           <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />To Date
-              <TooltipButton content={<p>Select the end date of your trip.</p>} />
+            <label className="relative flex items-center justify-between">
+              <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-4">
+                <FaAsterisk className="text-red-500 text-sm pe-2" />
+                Services
+                <TooltipButton content={<p>Select the Services you're interested in</p>} />
+              </div>
+              <div className="flex justify-between items-center gap-1">
+                <span className="text-red-500 bg-stone-200 px-3 p-1 rounded-full font-bold text-[14px]">
+                  {selectedServices.length}&nbsp;/&nbsp;{servicesOptions.length}
+                </span>
+                {selectedServices.length > 0 && (
+                  <button
+                    onClick={() => setSelectedServices([])}
+                    type="button"
+                    className="bg-black px-3 p-1 rounded-full text-white hover:bg-slate-700 duration- transition-all"
+                  >
+                    Clear all
+                  </button>
+                )}
+              </div>
             </label>
-            <Controller
-              name="toDate"
-              control={control}
-              render={({ field }) => (
-                <ReactDatePicker
-                  {...field}
-                  selected={field.value}
-                  onChange={(date) => field.onChange(date)}
-                  minDate={watch('fromDate') || today}
-                  dateFormat="dd-MM-yyyy"
-                  placeholderText="Select to date"
-                  className="mt-1 block  w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 "
-                  wrapperClassName="w-full "
-                />
-              )}
-            />
-            {errors.toDate && <p className='text-red-500 ps-4 text-[10px]'>{errors.toDate.message}</p>}
+
+            <select
+              name="services"
+              onChange={handleServiceChange}
+              className={`mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+            >
+              <option value="" disabled>Select a service</option>
+              {servicesOptions.sort().map((service, index) => (
+                <option
+                  key={index}
+                  value={service}
+                  className={selectedServices.includes(service) ? 'bg-gray-400' : ''}
+                  disabled={selectedServices.includes(service)}
+                >
+                  {service}
+                </option>
+              ))}
+            </select>
+
+            <div className="w-full flex-wrap flex gap-2 ps-2 py-1">
+              {selectedServices.map((item, index) => (
+                <div key={index} className="text-xs font-sans font-bold w-full flex items-start justify-between gap-2 text-blue-700 rounded-full">
+                  <div className="flex gap-1">
+                    <p className="w-fit">{item}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeService(item)}
+                    className="ml-2 text-xs text-gray-500 hover:text-red-500"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            {errors.preferredServices && (
+              <p className="text-red-500 ps-4 text-[10px]">{errors.preferredServices.message}</p>
+            )}
           </div>
         </div>
 
@@ -353,3 +394,4 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+

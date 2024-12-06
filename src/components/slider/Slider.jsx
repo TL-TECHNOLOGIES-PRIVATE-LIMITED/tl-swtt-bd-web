@@ -157,10 +157,10 @@ const Slider = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.8, ease: "easeOut" }}
-            className="md:text-lg text-xs leading-3 ps-1 font-normal text-stone-400 border-s-2 border-red-600 list-disc pl-5"
+            className="md:text-lg text-xs leading-3 ps-1 font-normal text-stone-400 list-disc pl-5"
           >
             {services[currentServiceIndex].paragraph.split('. ').map((sentence, index) => (
-              <li key={index}><em>{sentence.trim()}</em></li>
+              <li key={index}><em className='border-s-2 border-red-600 pl-1'>{sentence.trim()}</em></li>
             ))}
           </motion.ul>
 
