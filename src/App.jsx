@@ -40,7 +40,7 @@ export default function App() {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-      }, 2000); 
+      }, 3000); 
     };
 
     handleRouteChange();
@@ -50,7 +50,7 @@ export default function App() {
     // Hide the loading spinner after the initial load
     const initialLoadTimeout = setTimeout(() => {
       setLoading(false);
-    }, 2000); //3500
+    }, 3000); //3500
 
     return () => clearTimeout(initialLoadTimeout);
   }, []);

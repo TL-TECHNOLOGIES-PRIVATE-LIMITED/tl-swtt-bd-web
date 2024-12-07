@@ -52,12 +52,12 @@ const schema = yup.object().shape({
     .string()
     .required('Type of travel is required'),
 
-  preferredServices: yup.array().min(1, 'At least one service must be selected').required('Preferred services are required'),
+  preferredServices: yup.array().min(1, 'At least one service must be selected').required('Services are required'),
 
   message: yup.string().optional(),
 });
 const ContactForm = () => {
-  const { register, control, handleSubmit, formState: { errors }, watch } = useForm({
+  const { register, control, handleSubmit, formState: { errors }, watch, setValue } = useForm({
     resolver: yupResolver(schema)
   });
 
@@ -75,6 +75,7 @@ const ContactForm = () => {
     } else {
       setSelectedServices([...selectedServices, value]);
     }
+    setValue('preferredServices', selectedServices);
   };
 
   const removeService = (service) => {
@@ -228,7 +229,7 @@ const ContactForm = () => {
               onChange={handleServiceChange}
               className={`mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500`}
             >
-              <option value="" disabled>Select a service</option>
+              <option value="" >Select a service</option>
               {servicesOptions.sort().map((service, index) => (
                 <option
                   key={index}
@@ -306,7 +307,7 @@ const ContactForm = () => {
               Trivandrum
             </div>
 
-            <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm  transition-colors duration-300 cursor-default">
+            {/* <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm  transition-colors duration-300 cursor-default">
               Kanyakumari
             </div>
 
@@ -320,7 +321,7 @@ const ContactForm = () => {
 
             <div className="inline-flex items-center px-3  py-1  border-2 border-black rounded-full text-xs  shadow-sm transition-colors duration-300 cursor-default">
               UAE
-            </div>
+            </div> */}
           </div>
         </div>
 

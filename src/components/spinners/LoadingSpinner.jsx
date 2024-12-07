@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../img/Kd-logo.png';
+import logo from '../../img/skyworldLogo.png';
 
 const LoadingSpinner = () => {
   return (
@@ -9,9 +9,9 @@ const LoadingSpinner = () => {
           <img src={logo} alt="Kerala Drives logo" className="w-full h-full object-contain" />
         </div>
       </div>
-      <div className="">
+      {/* <div className="">
         <h1 className="text-3xl font-bold text-orange-600">Sky World Tours and Travels</h1>
-      </div>
+      </div> */}
     </div>
   );
 };

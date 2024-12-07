@@ -1,9 +1,9 @@
-import thrilladventure from '../img/Thrill-Adventure.png'
-import relaxrecharge from '../img/Relax-Enjoy.png'
-import feastonfavour from '../img/Great-Food.png'
-import journeyinluxury from '../img/PickYourVehicle.png'
-import justforyou from '../img/JustforYou.png'
-import travelincomfort from '../img/TravelinComfort.png'
+import kickstartCareer from '../img/1.kickstart-career.png'
+import hotJobs from '../img/2.hotJobs.png'
+import specialOffer from '../img/3.specialOffer.png'
+import successStories from '../img/4.successStories.png'
+import travelPackageHighlight from '../img/5.travelPackageHighlight.png'
+import faqSupport from '../img/6.faqSupport.png'
 import thrilladventure2 from '../img/Fun-Adventure.png'
 import accomodation from '../img/Accomodation.png'
 import accomodation2 from '../img/Accomodation-2.jpg'
@@ -13,37 +13,37 @@ import accomodation2 from '../img/Accomodation-2.jpg'
 
 export const services = [
   {
-    "image": [thrilladventure , thrilladventure2],
+    "image": [kickstartCareer],
     "heading": "Kickstart Your Career Abroad!",
     // "Tagline": "Gear up for the Ultimate Adventure.",
     "paragraph": "Dream job opportunities in Dubai and GCC! Starting from just ₹60,000 all-inclusive. Visa + Ticket + Quick Processing in 10 Days!"
   },
   {
-    "image": relaxrecharge,
+    "image": hotJobs,
     "heading": "Hot Job Openings!",
     // "Tagline": "Escape, Relax, and Recharge in Comfort.",
     "paragraph": "Restaurant Staff: Cooks, Waiters, and Assistants. Supermarket: Sales & Delivery Boys. Skilled Workers: Electricians, Welders, and Plumbers"
   },
   {
-    "image": feastonfavour,
+    "image": specialOffer,
     "heading": "Special Offer: Limited-Time Discount!",
     // "Tagline": "Embark on a Culinary Journey.",
     "paragraph": "Book now and get ₹5,000 off on job placement packages. Offer valid till [date]."
   },
   {
-    "image": travelincomfort,
+    "image": successStories,
     "heading": "Success Stories!",
     // "Tagline": "Travel in Comfort and Style.",
     "paragraph": `"Thanks to SkyWorld, I secured a job as a chef in Dubai within 2 weeks!" -- Rajesh Kumar. Your success story could be next!`
   },
   {
-    "image": journeyinluxury,
+    "image": travelPackageHighlight,
     "heading": "Explore the World with SkyWorld",
     // "Tagline": "Find Your Perfect Ride.",
     "paragraph": "Discover exciting travel packages for Dubai and GCC!. Holiday packages starting at ₹45,000."
   },
   {
-    "image": justforyou,
+    "image": faqSupport,
     "heading": "Have Questions?",
     // "Tagline": "Tailored Journeys, Extraordinary Adventures.",
     "paragraph": "We’re here to help you every step of the way!. FAQs and 24/7 support available."

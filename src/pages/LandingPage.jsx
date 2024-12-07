@@ -1,6 +1,6 @@
 import React from 'react';
-import bg from '../img/hero-banner.jpg';
 import Slider from '../components/slider/Slider';
+import bg from '../img/background-image-4.jpg';
 import Navbar from '../components/navbar/Navbar';
 import ContactForm from '../components/form/ContactForm';
 import CookieConsent from '../components/form/cookieComponents';
@@ -35,8 +35,7 @@ const LandingPage = () => {
               <ContactForm />
             </div>
           </div>
-          <p className="md:mt-4 py-2  text-center w-full bg-black md:bg-transparent  md:text-md text-xs  text-white font-bold">&#169; {" "}2024 - <a href="#" target="_blank">SKY TOURS AND TRAVELS</a>. ALL RIGHTS  RESERVED.</p>
-        </div>
+          <p className="md:mt-4 py-2  text-center w-full bg-black md:bg-transparent  md:text-md text-xs  text-white font-bold">&#169; {" "}2024 - <a href="https://www.tltechnologies.net/" target="_blank">TL TECHNOLOGIES</a>. ALL RIGHTS  RESERVED.</p>        </div>
       </div>
       <ChatBotModal />
     </div>

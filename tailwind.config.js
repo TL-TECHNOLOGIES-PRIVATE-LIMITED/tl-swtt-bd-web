@@ -7,12 +7,13 @@ export default {
   theme: {
     extend: {
       animation: {
-        drive: 'drive 1s ease-in-out infinite',
+        drive: 'drive 2s ease-in-out infinite',
       },
       keyframes: {
         drive: {
-          '0%': { transform: 'translateX(-70%)' },
-          '100%': { transform: 'translateX(70%)' },
+          '0%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+          '100%': { transform: 'translateY(0)' },
         },
       },
     },
