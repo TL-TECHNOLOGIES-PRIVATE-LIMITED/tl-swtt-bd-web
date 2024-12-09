@@ -70,12 +70,20 @@ const ContactForm = () => {
 
   const handleServiceChange = (event) => {
     const value = event.target.value;
-    if (selectedServices.includes(value)) {
-      setSelectedServices(selectedServices.filter(service => service !== value));
+    let updatedServices;
+
+    if (value) {
+      if (selectedServices.includes(value)) {
+        updatedServices = selectedServices.filter(service => service !== value);
+      } else {
+        updatedServices = [...selectedServices, value];
+      }
     } else {
-      setSelectedServices([...selectedServices, value]);
+      updatedServices = [];
     }
-    setValue('preferredServices', selectedServices);
+
+    setSelectedServices(updatedServices);
+    setValue('preferredServices', updatedServices);
   };
 
   const removeService = (service) => {
@@ -85,17 +93,20 @@ const ContactForm = () => {
   const onSubmit = (data) => {
     setShowAlert(true); // Show alert on form submission
 
-    const formattedFromDate = format(new Date(data.fromDate), 'dd MMM yyyy');
-    const formattedToDate = format(new Date(data.toDate), 'dd MMM yyyy');
+    // const formattedFromDate = format(new Date(data.fromDate), 'dd MMM yyyy');
+    // const formattedToDate = format(new Date(data.toDate), 'dd MMM yyyy');
 
     const whatsappMessage =
       `🌟 *Trip Enquiry* 🌟\n\n` +
       `👤 *Name :* ${data.name}\n` +
+      `📞 *Email :* ${data.email}\n` +
       `📞 *Phone :* +${phone}\n` +
-      `🌍 *Destination :* ${data.destination}\n` +
-      `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
-      `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
-      `📝 *Message :* ${data.message || 'No additional message'}\n\n`;
+      `🌍 *Country :* ${data.country}\n` +
+      // `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
+      // `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
+      `✈️ *Type of Travel :* ${data.typeOfTravel}\n` +
+      `📝 *Message :* ${data.message || 'No additional message'}\n` +
+      `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n\n`;
 
     const url = `https://api.whatsapp.com/send?phone=917306555586&text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -283,20 +294,20 @@ const ContactForm = () => {
 
         <div className='w-full flex justify-center'>
           <button
-            class="overflow-hidden relative w-32  h-10 mt-3 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer  group"
+            className="overflow-hidden relative w-32  h-10 mt-3 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer  group"
           >
             Lets Talk !
             <span
-              class="absolute w-36 h-32 -top-8 -left-2 bg-red-200 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-bottom"
+              className="absolute w-36 h-32 -top-8 -left-2 bg-red-200 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-500 duration-1000 origin-bottom"
             ></span>
             <span
-              class="absolute w-36 h-32 -top-8 -left-2 bg-red-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-bottom"
+              className="absolute w-36 h-32 -top-8 -left-2 bg-red-400 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-700 duration-700 origin-bottom"
             ></span>
             <span
-              class="absolute w-36 h-32 -top-8 -left-2 bg-red-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-bottom"
+              className="absolute w-36 h-32 -top-8 -left-2 bg-red-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-bottom"
             ></span>
             <span
-              class="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute text-base  top-2 left-5 z-10"
+              className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute text-base  top-2 left-5 z-10"
             >Lets Talk !</span>
           </button>
         </div>

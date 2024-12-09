@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, forwardRef } from 'react'
 import countryList from 'react-select-country-list'
 
-function CountrySelector({ onChange, value, name }) {
+const CountrySelector = forwardRef(({ onChange, value, name }, ref) => {
   // Generate the country options using useMemo for performance optimization
   const options = useMemo(() => {
     const countryOptions = countryList().getData();
@@ -14,7 +14,7 @@ function CountrySelector({ onChange, value, name }) {
       name={name}
       value={value}
       onChange={onChange}
-      
+      ref={ref}
       className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
     >
       {/* Default option */}
@@ -28,6 +28,6 @@ function CountrySelector({ onChange, value, name }) {
       ))}
     </select>
   )
-}
+})
 
 export default CountrySelector

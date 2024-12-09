@@ -4,9 +4,9 @@ import specialOffer from '../img/3.specialOffer.png'
 import successStories from '../img/4.successStories.png'
 import travelPackageHighlight from '../img/5.travelPackageHighlight.png'
 import faqSupport from '../img/6.faqSupport.png'
-import thrilladventure2 from '../img/Fun-Adventure.png'
-import accomodation from '../img/Accomodation.png'
-import accomodation2 from '../img/Accomodation-2.jpg'
+// import thrilladventure2 from '../img/Fun-Adventure.png'
+// import accomodation from '../img/Accomodation.png'
+// import accomodation2 from '../img/Accomodation-2.jpg'
 
 
 

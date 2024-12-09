@@ -18,16 +18,16 @@ export default function App() {
   // First install all dependencies :- npm intsall
   // Then run the code :- npm run dev
 
-  // created date : 14-OCT-2024 || created by : Gurudas P R  || module : 1 ||
+  // created date : 03-DEC-2024 || created by : Thasleem khan || module : 1 ||
   // modified date : -|| modified by : || module : 1 ||
   // modified date : - || modified by :  || module : 1 ||
 
-  // Technical summary(Pre-setups) created date/by :  Gurudas P R  ||
+  // Technical summary(Pre-setups) created date/by :  Thasleem khan  ||
   // Domain :   || https://enquiry.keraladrives.com/
   // Hosting :   || vercel || 
   // SSL :   || cloudflare ||
 
-  // Phase summary :   || created date/by :  Gurudas P R   ||
+  // Phase summary :   || created date/by :  Thasleem khan  ||
   // Phase 1 :  SetUps ||
   // Phase 2 :  Development/Main page creation ||
   // Phase 3 :  Production  ||
