@@ -105,8 +105,8 @@ const ContactForm = () => {
       // `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
       // `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
       `✈️ *Type of Travel :* ${data.typeOfTravel}\n` +
-      `📝 *Message :* ${data.message || 'No additional message'}\n` +
-      `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n\n`;
+      `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
+      `📝 *Message :* ${data.message || 'No additional message'}\n\n` ;
 
     const url = `https://api.whatsapp.com/send?phone=917306555586&text=${encodeURIComponent(whatsappMessage)}`;
 
