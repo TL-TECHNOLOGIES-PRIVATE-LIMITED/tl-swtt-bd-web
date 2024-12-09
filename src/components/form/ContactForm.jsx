@@ -121,7 +121,7 @@ const ContactForm = () => {
     <div className="custom-scrollbar p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
       {showAlert && <CustomAlert />}
       <form onSubmit={handleSubmit(onSubmit)} className="md:space-y-2 space-y-3 max-w-lg mx-auto flex flex-col justify-between h-full w-full">
-        <h1 className='text-3xl font-bold space-y-2'>Plan Your Trip !</h1>
+        <h1 className='text-3xl font-bold space-y-2'>Know More About Us !</h1>
         <p className='md:text-sm text-[10px] text-black flex items-center'>Please fill out all required fields (<FaAsterisk className='text-red-500 text-[7px]' />) to ensure a smooth process.</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -292,9 +292,15 @@ const ContactForm = () => {
           />
         </div>
 
-        <div className='w-full flex justify-center'>
+        <div className="w-full flex justify-between items-center py-2">
+          <div className="flex flex-wrap gap-2 items-center">
+            <img src={mapIcon} alt="map" className='h-10 w-10' />
+            <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
+              Location
+            </div>
+          </div>
           <button
-            className="overflow-hidden relative w-32  h-10 mt-3 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer  group"
+            className="overflow-hidden relative w-32 h-10 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer group"
           >
             Lets Talk !
             <span
@@ -307,33 +313,9 @@ const ContactForm = () => {
               className="absolute w-36 h-32 -top-8 -left-2 bg-red-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform group-hover:duration-1000 duration-500 origin-bottom"
             ></span>
             <span
-              className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute text-base  top-2 left-5 z-10"
+              className="group-hover:opacity-100 group-hover:duration-1000 duration-100 opacity-0 absolute text-base top-2 left-5 z-10"
             >Lets Talk !</span>
           </button>
-        </div>
-        <div className="w-full py-2">
-          <div className="flex flex-wrap gap-2 justify-center items-center">
-          <img src={mapIcon} alt="map" className='    h-10 w-10'  />
-            <div className="inline-flex items-center  px-3  py-1  border-2 border-black  rounded-full text-xs shadow-sm  transition-colors duration-300 cursor-default">
-              Trivandrum
-            </div>
-
-            {/* <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm  transition-colors duration-300 cursor-default">
-              Kanyakumari
-            </div>
-
-            <div className="inline-flex items-center px-3 py-1  border-2 border-black  rounded-full text-xs  shadow-sm  transition-colors duration-300 cursor-default">
-              Kochi
-            </div>
-
-            <div className="items-center px-3 py-1 border-2 border-black  rounded-full text-xs shadow-sm  transition-colors duration-300 cursor-default">
-              Wayanad
-            </div>
-
-            <div className="inline-flex items-center px-3  py-1  border-2 border-black rounded-full text-xs  shadow-sm transition-colors duration-300 cursor-default">
-              UAE
-            </div> */}
-          </div>
         </div>
 
         <div className="flex justify-evenly items-center w-full flex-wrap text-black  ">
@@ -349,14 +331,14 @@ const ContactForm = () => {
               <FaGlobeAmericas
                 className=" md:text-2xl text-lg hover:text-black transition-all duration-300 ease-in-out text-stone-600" />
             }
-            link={"https://keraladrives.com/"}
+            link={"#"}
           />
           <SocialMediaIcons
             icon={
               <SiGooglemybusiness
                 className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
             }
-            link={"https://g.co/kgs/Rhuop1m"}
+            link={"#"}
           />
           {/* <SocialMediaIcons
             icon={
@@ -369,31 +351,31 @@ const ContactForm = () => {
             icon={
               <FaFacebookF className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-500" />
             }
-            link={"https://www.facebook.com/keraladrivestourstravel/"}
+            link={"#"}
           />
           <SocialMediaIcons
             icon={
               <FaInstagram className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-pink-500" />
             }
-            link={"https://www.instagram.com/kerala_drives/"}
+            link={"#"}
           />
           <SocialMediaIcons
             icon={
               <FaYoutube className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-500" />
             }
-            link={"https://www.youtube.com/channel/UC3tmfmBZf5Ufqo2JSEwj6BA?sub_confirmation=1"}
+            link={"#"}
           />
           <SocialMediaIcons
             icon={
               <FaPinterest className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-600" />
             }
-            link={"https://www.pinterest.com/keraladrives195/"}
+            link={"#"}
           />
           <SocialMediaIcons
             icon={
               <FaLinkedin className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
             }
-            link={"https://www.linkedin.com/company/kerala-drives/"}
+            link={"#"}
           />
 
 
