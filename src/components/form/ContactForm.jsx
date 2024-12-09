@@ -48,9 +48,13 @@ const schema = yup.object().shape({
     .string()
     .required('Country is required'),
 
+  highestEducation: yup
+    .string()
+    .optional(),
+
   typeOfTravel: yup
     .string()
-    .required('Type of travel is required'),
+    .optional(),
 
   preferredServices: yup.array().min(1, 'At least one service must be selected').required('Services are required'),
 
@@ -121,7 +125,7 @@ const ContactForm = () => {
     <div className="custom-scrollbar p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
       {showAlert && <CustomAlert />}
       <form onSubmit={handleSubmit(onSubmit)} className="md:space-y-2 space-y-3 max-w-lg mx-auto flex flex-col justify-between h-full w-full">
-        <h1 className='text-3xl font-bold space-y-2'>Discover Your Next Adventure!</h1>
+        <h1 className='text-3xl font-bold space-y-2'>Know More About Us !</h1>
         <p className='md:text-sm text-[10px] text-black flex items-center'>Please fill out all required fields (<FaAsterisk className='text-red-500 text-[7px]' />) to ensure a smooth process.</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -200,8 +204,24 @@ const ContactForm = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4 tr-tp-4">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />Type of Travel
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
+              {/* <FaAsterisk className='text-red-500 text-sm pe-2' /> */}
+              Highest Education
+              <TooltipButton content={<p>Select your highest level of education.</p>} />
+            </label>
+            <select {...register('highestEducation')} className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500">
+              <option value="">Select your highest education</option>
+              <option value="highschool">High School</option>
+              <option value="bachelor">Bachelor's Degree</option>
+              <option value="master">Master's Degree</option>
+              <option value="phd">PhD</option>
+            </select>
+            {errors.highestEducation && <p className='text-red-500 ps-4 text-[10px]'>{errors.highestEducation.message}</p>}
+          </div>
+          <div>
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
+              {/* <FaAsterisk className='text-red-500 text-sm pe-2' /> */}
+              Type of Travel
               <TooltipButton content={<p>Select your type of travel.</p>} />
             </label>
             <select {...register('typeOfTravel')} className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -212,68 +232,68 @@ const ContactForm = () => {
             </select>
             {errors.typeOfTravel && <p className='text-red-500 ps-4 text-[10px]'>{errors.typeOfTravel.message}</p>}
           </div>
-          <div>
-            <label className="relative flex items-center justify-between">
-              <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-4">
-                <FaAsterisk className="text-red-500 text-sm pe-2" />
-                Services
-                <TooltipButton content={<p>Select the Services you're interested in</p>} />
-              </div>
-              <div className="flex justify-between items-center gap-1">
-                <span className="text-red-500 bg-stone-200 px-3 p-1 rounded-full font-bold text-[14px]">
-                  {selectedServices.length}&nbsp;/&nbsp;{servicesOptions.length}
-                </span>
-                {selectedServices.length > 0 && (
-                  <button
-                    onClick={() => setSelectedServices([])}
-                    type="button"
-                    className="bg-black px-3 p-1 rounded-full text-white hover:bg-slate-700 duration- transition-all"
-                  >
-                    Clear all
-                  </button>
-                )}
-              </div>
-            </label>
+        </div>
 
-            <select
-              name="services"
-              onChange={handleServiceChange}
-              className={`mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500`}
-            >
-              <option value="" >Select a service</option>
-              {servicesOptions.sort().map((service, index) => (
-                <option
-                  key={index}
-                  value={service}
-                  className={selectedServices.includes(service) ? 'bg-gray-400' : ''}
-                  disabled={selectedServices.includes(service)}
-                >
-                  {service}
-                </option>
-              ))}
-            </select>
-
-            <div className="w-full flex-wrap flex gap-2 ps-2 py-1">
-              {selectedServices.map((item, index) => (
-                <div key={index} className="text-xs font-sans font-bold w-full flex items-start justify-between gap-2 text-blue-700 rounded-full">
-                  <div className="flex gap-1">
-                    <p className="w-fit">{item}</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => removeService(item)}
-                    className="ml-2 text-xs text-gray-500 hover:text-red-500"
-                  >
-                    ✕
-                  </button>
-                </div>
-              ))}
+        <div>
+          <label className="relative flex items-center justify-between">
+            <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-4">
+              <FaAsterisk className="text-red-500 text-sm pe-2" />
+              Preffered Services
+              <TooltipButton content={<p>Select the Services you're interested in</p>} />
             </div>
+            <div className="flex justify-between items-center gap-1">
+              <span className="text-red-500 bg-stone-200 px-3 p-1 rounded-full font-bold text-[14px]">
+                {selectedServices.length}&nbsp;/&nbsp;{servicesOptions.length}
+              </span>
+              {selectedServices.length > 0 && (
+                <button
+                  onClick={() => setSelectedServices([])}
+                  type="button"
+                  className="bg-black px-3 p-1 rounded-full text-white hover:bg-slate-700 duration- transition-all"
+                >
+                  Clear all
+                </button>
+              )}
+            </div>
+          </label>
+          <select
+            name="services"
+            onChange={handleServiceChange}
+            className={`mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+          >
+            <option value="">Select a service</option>
+            {servicesOptions.sort().map((service, index) => (
+              <option
+                key={index}
+                value={service}
+                className={selectedServices.includes(service) ? 'bg-gray-400' : ''}
+                disabled={selectedServices.includes(service)}
+              >
+                {service}
+              </option>
+            ))}
+          </select>
 
-            {errors.preferredServices && (
-              <p className="text-red-500 ps-4 text-[10px]">{errors.preferredServices.message}</p>
-            )}
+          <div className="w-full flex-wrap flex gap-2 ps-2 py-1">
+            {selectedServices.map((item, index) => (
+              <div key={index} className="text-xs font-sans font-bold w-full flex items-start justify-between gap-2 text-blue-700 rounded-full">
+                <div className="flex gap-1">
+                  <p className="w-fit">{item}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => removeService(item)}
+                  className="ml-2 text-xs text-gray-500 hover:text-red-500"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
           </div>
+
+          {errors.preferredServices && (
+            <p className="text-red-500 ps-4 text-[10px]">{errors.preferredServices.message}</p>
+          )}
         </div>
 
         <div>
@@ -296,7 +316,10 @@ const ContactForm = () => {
           <div className="flex flex-wrap gap-2 items-center">
             <img src={mapIcon} alt="map" className='h-10 w-10' />
             <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
-              Location
+              Dubai
+            </div>
+            <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
+              Trivandrum
             </div>
           </div>
           <button
@@ -320,12 +343,7 @@ const ContactForm = () => {
 
         <div className="flex justify-evenly items-center w-full flex-wrap text-black  ">
           <span>follow us</span>
-          <SocialMediaIcons
-            icon={
-              <FaWhatsapp className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-green-500" />
-            }
-            link={"https://api.whatsapp.com/send/?phone=%2B918086407979&text=Hello%2C+I+am+interested+to+know+more+about+your+service.&type=phone_number&app_absent=0"}
-          />
+          
           <SocialMediaIcons
             icon={
               <FaGlobeAmericas
@@ -376,6 +394,12 @@ const ContactForm = () => {
               <FaLinkedin className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
             }
             link={"#"}
+          />
+          <SocialMediaIcons
+            icon={
+              <FaWhatsapp className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-green-500" />
+            }
+            link={"https://api.whatsapp.com/send/?phone=%2B918086407979&text=Hello%2C+I+am+interested+to+know+more+about+your+service.&type=phone_number&app_absent=0"}
           />
 
 

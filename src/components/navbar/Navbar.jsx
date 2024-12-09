@@ -16,7 +16,7 @@ function Navbar() {
       <div className="font-bold w-full  flex flex-wrap  justify-between items-center">
         <div className="flex justify-between w-full items-end gap-4">
           <div className="text-3xl h-fit w-fit rounded-full text-[50px]">
-            <img src={logo} alt="" className="h-16 w-16 rounded-full" />
+            <img src={logo} alt="" style={{ width: '7rem' }}  className="" />
           </div>
           <div className="md:text-[36px] text-xl font-bold text-white  drop-shadow-md">
             SKY WORLD TOURS AND TRAVELS
