@@ -121,7 +121,7 @@ const ContactForm = () => {
     <div className="custom-scrollbar p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
       {showAlert && <CustomAlert />}
       <form onSubmit={handleSubmit(onSubmit)} className="md:space-y-2 space-y-3 max-w-lg mx-auto flex flex-col justify-between h-full w-full">
-        <h1 className='text-3xl font-bold space-y-2'>Know More About Us !</h1>
+        <h1 className='text-3xl font-bold space-y-2'>Discover Your Next Adventure!</h1>
         <p className='md:text-sm text-[10px] text-black flex items-center'>Please fill out all required fields (<FaAsterisk className='text-red-500 text-[7px]' />) to ensure a smooth process.</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
