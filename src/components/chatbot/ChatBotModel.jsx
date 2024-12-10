@@ -14,12 +14,12 @@ export const faqData = [
   },
   {
     question: "Where is SkyWorld located?",
-    answer: "We are based in [insert location], but our services are available globally.",
+    answer: "We are based in Nalanchira, Thiruvananthapuram, but our services are available worldwide.",
     keywords: ["location", "SkyWorld", "global services"]
   },
   {
     question: "How can I contact SkyWorld?",
-    answer: "You can reach us at +91 9446004261 or via email at [insert email address].",
+    answer: "You can reach us at +91 9446004261 or via email at jbskyworld@gmail.com.",
     keywords: ["contact", "SkyWorld", "phone number", "email"]
   },
   {
