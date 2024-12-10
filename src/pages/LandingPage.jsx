@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from '../components/slider/Slider';
-import bg from '../img/background-image-5.jpg';
+import bg from '../img/background-image-4.jpg';
 import Navbar from '../components/navbar/Navbar';
 import ContactForm from '../components/form/ContactForm';
 import CookieConsent from '../components/form/cookieComponents';
