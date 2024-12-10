@@ -17,10 +17,10 @@ import CustomAlert from '../alert/CustomAlert';
 import CountrySelector from './CountrySelector';
 
 const servicesOptions = [
+  "Job Placement Assistance",
   "Airline Ticket Booking",
   "Visa Processing Services",
   "Tour Packages",
-  "Job Placement Assistance",
   "Travel Insurance",
   "Accommodation Arrangements",
   "24/7 Travel Support",
@@ -36,7 +36,7 @@ const schema = yup.object().shape({
 
   email: yup
     .string()
-    .required('Email is required')
+    .optional()
     .email('Email is not valid'),
 
   phoneNumber: yup
@@ -101,18 +101,19 @@ const ContactForm = () => {
     // const formattedToDate = format(new Date(data.toDate), 'dd MMM yyyy');
 
     const whatsappMessage =
-      `🌟 *Trip Enquiry* 🌟\n\n` +
+      `🌟 *Enquiry* 🌟\n\n` +
       `👤 *Name :* ${data.name}\n` +
-      `📞 *Email :* ${data.email}\n` +
+      `📞 *Email :* ${data.email || 'Nil'}\n` +
       `📞 *Phone :* +${phone}\n` +
       `🌍 *Country :* ${data.country}\n` +
+      `🎓 *Highest Education :* ${data.highestEducation || 'Nil'}\n` +
       // `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
       // `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
-      `✈️ *Type of Travel :* ${data.typeOfTravel}\n` +
+      `✈️ *Type of Travel :* ${data.typeOfTravel || 'Nil'}\n` +
       `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
       `📝 *Message :* ${data.message || 'No additional message'}\n\n` ;
 
-    const url = `https://api.whatsapp.com/send?phone=917306555586&text=${encodeURIComponent(whatsappMessage)}`;
+    const url = `https://api.whatsapp.com/send?phone=919446004261&text=${encodeURIComponent(whatsappMessage)}`;
 
     // Show alert for 2 seconds, then open WhatsApp
     setTimeout(() => {
@@ -130,7 +131,7 @@ const ContactForm = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="gap-1 text-xs flex items-center font-bold text-gray-700 ps-4">
+            <label className="gap-1 text-xs flex items-center font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-red-500 text-sm pe-2' />Name
               <TooltipButton content={<p>Enter your full name as it appears on official documents.</p>} />
             </label>
@@ -143,8 +144,8 @@ const ContactForm = () => {
             {errors.name && <p className='text-red-500 ps-4 text-[10px]'>{errors.name.message}</p>}
           </div>
           <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />Email
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
+              <FaAsterisk className='text-white text-sm pe-2' />Email
               <TooltipButton content={<p>Provide your email address.</p>} />
             </label>
             <input
@@ -157,7 +158,7 @@ const ContactForm = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-red-500 text-sm pe-2' />Phone Number
               <TooltipButton content={<p>Provide your contact number including country code.</p>} />
             </label>
@@ -185,7 +186,7 @@ const ContactForm = () => {
             {errors.phoneNumber && <p className='text-red-500 ps-4 text-[10px]'>{errors.phoneNumber.message}</p>}
           </div>
           <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-red-500 text-sm pe-2' />Country
               <TooltipButton content={<p>Select your country.</p>} />
             </label>
@@ -204,8 +205,8 @@ const ContactForm = () => {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
-              {/* <FaAsterisk className='text-red-500 text-sm pe-2' /> */}
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
+              <FaAsterisk className='text-white text-sm pe-2' />
               Highest Education
               <TooltipButton content={<p>Select your highest level of education.</p>} />
             </label>
@@ -219,8 +220,8 @@ const ContactForm = () => {
             {errors.highestEducation && <p className='text-red-500 ps-4 text-[10px]'>{errors.highestEducation.message}</p>}
           </div>
           <div>
-            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
-              {/* <FaAsterisk className='text-red-500 text-sm pe-2' /> */}
+            <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
+              <FaAsterisk className='text-white text-sm pe-2' />
               Type of Travel
               <TooltipButton content={<p>Select your type of travel.</p>} />
             </label>
@@ -236,7 +237,7 @@ const ContactForm = () => {
 
         <div>
           <label className="relative flex items-center justify-between">
-            <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-4">
+            <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className="text-red-500 text-sm pe-2" />
               Preffered Services
               <TooltipButton content={<p>Select the Services you're interested in</p>} />
@@ -261,8 +262,8 @@ const ContactForm = () => {
             onChange={handleServiceChange}
             className={`mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500`}
           >
-            <option value="">Select a service</option>
-            {servicesOptions.sort().map((service, index) => (
+            <option value="">Select services</option>
+            {servicesOptions.map((service, index) => (
               <option
                 key={index}
                 value={service}
@@ -297,7 +298,7 @@ const ContactForm = () => {
         </div>
 
         <div>
-          <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-4">
+          <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
             Message (Optional)
             <TooltipButton content={<p>Let us know if you have any special requests or additional details regarding your booking.</p>} />
             <span className="text-blue-500 px-4 font-normal">
@@ -356,7 +357,7 @@ const ContactForm = () => {
               <SiGooglemybusiness
                 className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
             }
-            link={"#"}
+            link={"https://www.google.com/search?q=sky+world+tours+%26+travels&oq=SKY+WORLD+TOURS+%26+TRAVELS&gs_lcrp=EgZjaHJvbWUqBwgAEAAYgAQyBwgAEAAYgAQyDQgBEC4YrwEYxwEYgAQyBwgCEAAYgAQyBwgDEAAYgAQyCAgEEAAYFhgeMggIBRAAGBYYHjIICAYQABgWGB4yCAgHEAAYFhgeMggICBAAGBYYHjIICAkQABgWGB7SAQg4MDYyajBqN6gCALACAA&sourceid=chrome&ie=UTF-8&dlnr=1&ved=2ahUKEwi57ZDd7pSKAxXIwjgGHaWYD2MQl6ENegQIDhAE#dlnr=1"}
           />
           {/* <SocialMediaIcons
             icon={
@@ -369,37 +370,37 @@ const ContactForm = () => {
             icon={
               <FaFacebookF className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-500" />
             }
-            link={"#"}
+            link={"https://www.facebook.com/profile.php?id=61570017247047"}
           />
           <SocialMediaIcons
             icon={
               <FaInstagram className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-pink-500" />
             }
-            link={"#"}
+            link={"https://www.instagram.com/skyworld4all/"}
           />
           <SocialMediaIcons
             icon={
               <FaYoutube className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-500" />
             }
-            link={"#"}
+            link={"https://www.youtube.com/channel/UCBFv14WYl3c9dejPxZ-6BNw"}
           />
-          <SocialMediaIcons
+          {/* <SocialMediaIcons
             icon={
               <FaPinterest className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-red-600" />
             }
             link={"#"}
-          />
+          /> */}
           <SocialMediaIcons
             icon={
               <FaLinkedin className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-blue-600" />
             }
-            link={"#"}
+            link={"https://www.linkedin.com/in/sky-world-tours-and-travels-4b6773340/"}
           />
           <SocialMediaIcons
             icon={
               <FaWhatsapp className=" md:text-2xl text-lg transition-all duration-300 ease-in-out hover:text-black text-green-500" />
             }
-            link={"https://api.whatsapp.com/send/?phone=%2B918086407979&text=Hello%2C+I+am+interested+to+know+more+about+your+service.&type=phone_number&app_absent=0"}
+            link={"https://api.whatsapp.com/send/?phone=%2B919446004261&text=Hello%2C+I+am+interested+to+know+more+about+your+service.&type=phone_number&app_absent=0"}
           />
 
 

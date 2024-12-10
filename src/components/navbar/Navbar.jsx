@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../img/skyworldLogo.png';
+import logo from '../../img/skyworldLogo2.png';
 import SocialMediaIcons from '../icons/SocialMediaIcons';
 import { IoClose } from 'react-icons/io5';
 import { CgDetailsMore } from 'react-icons/cg';
