@@ -132,7 +132,7 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="gap-1 text-xs flex items-center font-bold text-gray-700 ps-2">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />Name
+              <FaAsterisk className='text-red-500 text-sm pe-2' /><span className='font-extrabold '>Name</span>
               <TooltipButton content={<p>Enter your full name as it appears on official documents.</p>} />
             </label>
             <input
@@ -145,7 +145,7 @@ const ContactForm = () => {
           </div>
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
-              <FaAsterisk className='text-white text-sm pe-2' />Email
+              <FaAsterisk className='text-white text-sm pe-2' /><span className='font-extrabold '>Email</span>
               <TooltipButton content={<p>Provide your email address.</p>} />
             </label>
             <input
@@ -159,7 +159,7 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />Phone Number
+              <FaAsterisk className='text-red-500 text-sm pe-2' /><span className='font-extrabold '>Phone Number</span>
               <TooltipButton content={<p>Provide your contact number including country code.</p>} />
             </label>
             <Controller
@@ -187,7 +187,7 @@ const ContactForm = () => {
           </div>
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
-              <FaAsterisk className='text-red-500 text-sm pe-2' />Country
+              <FaAsterisk className='text-red-500 text-sm pe-2' /><span className='font-extrabold '>Country</span>
               <TooltipButton content={<p>Select your country.</p>} />
             </label>
             <Controller
@@ -207,7 +207,7 @@ const ContactForm = () => {
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-white text-sm pe-2' />
-              Highest Education
+              <span className='font-extrabold '>Highest Education</span>
               <TooltipButton content={<p>Select your highest level of education.</p>} />
             </label>
             <select {...register('highestEducation')} className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -222,7 +222,7 @@ const ContactForm = () => {
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-white text-sm pe-2' />
-              Type of Travel
+              <span className='font-extrabold '>Type of Travel</span>
               <TooltipButton content={<p>Select your type of travel.</p>} />
             </label>
             <select {...register('typeOfTravel')} className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500">
@@ -239,7 +239,7 @@ const ContactForm = () => {
           <label className="relative flex items-center justify-between">
             <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className="text-red-500 text-sm pe-2" />
-              Preffered Services
+              <span className='font-extrabold '>Preffered Services</span>
               <TooltipButton content={<p>Select the Services you're interested in</p>} />
             </div>
             <div className="flex justify-between items-center gap-1">
@@ -299,7 +299,7 @@ const ContactForm = () => {
 
         <div>
           <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
-            Message (Optional)
+             <span className='font-extrabold '>Message (Optional)</span>
             <TooltipButton content={<p>Let us know if you have any special requests or additional details regarding your booking.</p>} />
             <span className="text-blue-500 px-4 font-normal">
               {message.length}/100 letters left
@@ -313,18 +313,18 @@ const ContactForm = () => {
           />
         </div>
 
-        <div className="w-full flex justify-between items-center py-2">
+        <div className="w-full flex justify-between flex-wrap items-center py-2">
           <div className="flex flex-wrap gap-2 items-center">
             <img src={mapIcon} alt="map" className='h-10 w-10' />
-            <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
+            <div className="inline-flex items-center px-3 py-1 border-2 border-black bg-black text-blue-200 rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
               Dubai
             </div>
-            <div className="inline-flex items-center px-3 py-1 border-2 border-black rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
+            <div className="inline-flex items-center px-3 py-1 border-2 border-black bg-black text-blue-200 rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
               Trivandrum
             </div>
           </div>
           <button
-            className="overflow-hidden relative w-32 h-10 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer group"
+            className="overflow-hidden relative w-28 h-10 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer group"
           >
             Lets Talk !
             <span
@@ -350,7 +350,7 @@ const ContactForm = () => {
               <FaGlobeAmericas
                 className=" md:text-2xl text-lg hover:text-black transition-all duration-300 ease-in-out text-stone-600" />
             }
-            link={"#"}
+            link={"/site"}
           />
           <SocialMediaIcons
             icon={

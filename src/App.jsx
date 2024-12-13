@@ -7,6 +7,7 @@ import LoadingSpinner from "./components/spinners/LoadingSpinner";
 import LandingPage from "./pages/LandingPage";
 import ChatBotModal from "./components/chatbot/ChatBotModel";
 import ErrorPage from "./pages/ErrorPage";
+import OnePage from "./pages/OnePage";
 
 
 export default function App() {
@@ -62,6 +63,7 @@ export default function App() {
         <Route>
           <Route path="/" element={<LandingPage/>} />
           <Route path="/cookie-policy" element={<ErrorPage/>} />
+          <Route path="/site" element={<OnePage/>} />
           <Route path="*" element={<ErrorPage/>} />
 
         </Route>
