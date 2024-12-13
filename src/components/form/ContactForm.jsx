@@ -101,17 +101,19 @@ const ContactForm = () => {
     // const formattedToDate = format(new Date(data.toDate), 'dd MMM yyyy');
 
     const whatsappMessage =
-      `🌟 *Enquiry* 🌟\n\n` +
-      `👤 *Name :* ${data.name}\n` +
-      `📞 *Email :* ${data.email || 'Nil'}\n` +
-      `📞 *Phone :* +${phone}\n` +
-      `🌍 *Country :* ${data.country}\n` +
-      `🎓 *Highest Education :* ${data.highestEducation || 'Nil'}\n` +
-      // `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
-      // `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
-      `✈️ *Type of Travel :* ${data.typeOfTravel || 'Nil'}\n` +
-      `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
-      `📝 *Message :* ${data.message || 'No additional message'}\n\n` ;
+    `🌟 *Enquiry* 🌟\n\n` +
+    `👤 *Name :* ${data.name}\n` +
+    `📞 *Email :* ${data.email || 'Nil'}\n` +
+    `📞 *Phone :* +${phone}\n` +
+    `🌍 *Country :* ${data.country}\n` +
+    `🎓 *Highest Education :* ${data.highestEducation || 'Nil'}\n` +
+    // `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
+    // `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
+    `✈️ *Type of Travel :* ${data.typeOfTravel || 'Nil'}\n` +
+    `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
+    `📝 *Message :* ${data.message || 'No additional message'}\n\n` +
+    `Want to know more? Visit: https://skyworld.go-bd.com`;
+  
 
     const url = `https://api.whatsapp.com/send?phone=919446004261&text=${encodeURIComponent(whatsappMessage)}`;
 
