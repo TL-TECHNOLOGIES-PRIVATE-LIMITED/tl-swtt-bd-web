@@ -76,6 +76,7 @@ const Slider = () => {
   return (
     <div className="relative w-full h-full overflow-x-hidden">
       {/* Slide Counter */}
+      
       <div className="absolute top-4 left-4 z-50">
         <div className="flex items-center gap-2">
           <div className="bg-black bg-opacity-60 backdrop-blur-sm text-white px-4 py-2 rounded-xl border border-white border-opacity-20">
@@ -189,7 +190,7 @@ const Slider = () => {
             className="md:text-lg text-xs leading-3 ps-1 font-normal text-stone-300 list-disc pl-5"
           >
             {services[currentServiceIndex].paragraph.split('. ').map((sentence, index) => (
-              <li key={index}><em className='border-s-2 border-red-600 pl-1'>{sentence.trim()}</em></li>
+              <li className='list-none' key={index} ><em className='border-s-2 border-yellow-400 pl-1'>{sentence.trim()}</em></li>
             ))}
           </motion.ul>
 

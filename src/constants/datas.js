@@ -1,6 +1,5 @@
 import kickstartCareer from '../img/1.kickstart-career.png'
-import hotJobs1 from '../img/hotjobopeningNew.jpg'
-import hotJobs2 from '../img/hotjobopening2.jpg'
+import hotJobs1 from "../img/hjo.jpg"
 import specialOffer from '../img/3.specialOffer.png'
 import successStories from '../img/4.successStories.png'
 import travelPackageHighlight from '../img/5.travelPackageHighlight.png'
@@ -20,7 +19,7 @@ export const services = [
     "paragraph": "Dream job opportunities in Dubai and GCC! Starting from just ₹60,000 all-inclusive. Visa + Ticket + Quick Processing in 10 Days!"
   },
   {
-    "image": [hotJobs1, hotJobs2],
+    "image": [hotJobs1],
     "heading": "Hot Job Openings!",
     // "Tagline": "Escape, Relax, and Recharge in Comfort.",
     "paragraph": "Restaurant Staff: Cooks, Waiters, and Assistants. Supermarket: Sales & Delivery Boys. Skilled Workers: Electricians, Welders, and Plumbers"
