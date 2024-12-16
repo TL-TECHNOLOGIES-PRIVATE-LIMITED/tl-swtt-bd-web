@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /site/
+
+  # Redirect 404s to the frontend router
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /site/index.html [L]
+</IfModule>
+
+# Serve 404.html for server-level 404s
+ErrorDocument 404 /site/404.html

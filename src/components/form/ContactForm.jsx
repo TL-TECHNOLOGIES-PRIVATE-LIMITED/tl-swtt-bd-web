@@ -105,7 +105,7 @@ const ContactForm = () => {
     `👤 *Name :* ${data.name}\n` +
     `📞 *Email :* ${data.email || 'Nil'}\n` +
     `📞 *Phone :* +${phone}\n` +
-    `🌍 *Country :* ${data.country}\n` +
+    // `🌍 *Country :* ${data.country}\n` +
     `🎓 *Highest Education :* ${data.highestEducation || 'Nil'}\n` +
     // `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
     // `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
@@ -128,7 +128,7 @@ const ContactForm = () => {
     <div className="custom-scrollbar p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
       {showAlert && <CustomAlert />}
       <form onSubmit={handleSubmit(onSubmit)} className="md:space-y-2 space-y-3 max-w-lg mx-auto flex flex-col justify-between h-full w-full">
-        <h1 className='text-3xl font-bold space-y-2'>Know More About Us !</h1>
+        <h1 className='text-3xl font-bold space-y-2'>Enquire for jobs in UAE !</h1>
         <p className='md:text-sm text-[10px] text-black flex items-center'>Please fill out all required fields (<FaAsterisk className='text-red-500 text-[7px]' />) to ensure a smooth process.</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -158,7 +158,7 @@ const ContactForm = () => {
             {errors.email && <p className='text-red-500 ps-4 text-[10px]'>{errors.email.message}</p>}
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1  ">
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-red-500 text-sm pe-2' /><span className='font-extrabold '>Phone Number</span>
@@ -187,7 +187,7 @@ const ContactForm = () => {
             />
             {errors.phoneNumber && <p className='text-red-500 ps-4 text-[10px]'>{errors.phoneNumber.message}</p>}
           </div>
-          <div>
+          {/* <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-red-500 text-sm pe-2' /><span className='font-extrabold '>Country</span>
               <TooltipButton content={<p>Select your country.</p>} />
@@ -203,7 +203,7 @@ const ContactForm = () => {
               )}
             />
             {errors.country && <p className='text-red-500 ps-4 text-[10px]'>{errors.country.message}</p>}
-          </div>
+          </div> */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -326,7 +326,7 @@ const ContactForm = () => {
             </div>
           </div>
           <button
-            className="overflow-hidden relative w-28 h-10 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer group"
+            className="overflow-hidden relative w-28 h-10 bg-red-700 text-white border-none rounded-md text-base font-bold cursor-pointer group"
           >
             Lets Talk !
             <span
