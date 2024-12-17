@@ -83,9 +83,16 @@ const schema = yup.object().shape({
   preferredServices: yup.array().min(1, 'At least one service must be selected').required('Services are required'),
 
   message: yup.string().optional(),
-  visaService: yup.string().when('preferredServices', {
+  visaServiceType: yup.string().when('preferredServices', {
     is: (services) => services && services.includes('Visa Processing Services'),
-    then: () => yup.string().required('Please select a visa service'),
+    then: () => yup.string().required('Please select a visa service type'),
+    otherwise: () => yup.string().optional()
+  }),
+  
+  visaService: yup.string().when(['preferredServices', 'visaServiceType'], {
+    is: (services, visaServiceType) => 
+      services && services.includes('Visa Processing Services') && visaServiceType,
+    then: () => yup.string().required('Please select a specific visa service'),
     otherwise: () => yup.string().optional()
   })
 });
@@ -98,6 +105,7 @@ const ContactForm = () => {
   const [phone, setPhone] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedVisaServiceType, setSelectedVisaServiceType] = useState('');
   const [selectedVisaService, setSelectedVisaService] = useState('');
 
   const message = watch('message', '');
@@ -120,25 +128,29 @@ const ContactForm = () => {
     setSelectedServices(updatedServices);
     setValue('preferredServices', updatedServices);
 
-    // Reset visa service if Visa Processing Services is not selected
+    // Reset visa service selections if Visa Processing Services is not selected
     if (!updatedServices.includes('Visa Processing Services')) {
+      setSelectedVisaServiceType('');
       setSelectedVisaService('');
+      setValue('visaServiceType', '');
       setValue('visaService', '');
     }
   };
+
   const removeService = (service) => {
-    setSelectedServices(selectedServices.filter(item => item !== service));
+    setSelectedServices(selectedServices.filter(item => item !== service));
   };
+
   const onSubmit = (data) => {
-    setShowAlert(true); // Show alert on form submission
+    setShowAlert(true);
   
     const submissionData = { ...data };
   
     if (selectedServices.includes('Visa Processing Services')) {
+      submissionData.visaServiceType = selectedVisaServiceType;
       submissionData.visaService = selectedVisaService;
     }
   
-    // Create a mapping for visa service labels
     const visaServiceLabels = {
       'uae-visiting': 'UAE Visiting Visa',
       'saudi-visiting': 'Saudi Arabia Visiting Visa',
@@ -171,7 +183,8 @@ const ContactForm = () => {
       `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
       // Add Visa Service details if selected
       (selectedServices.includes('Visa Processing Services') 
-        ? `✈️ *Visa Service :* ${visaServiceLabels[selectedVisaService] || selectedVisaService}\n` 
+        ? `✈️ *Visa Service Type :* ${selectedVisaServiceType}\n` +
+          `✈️ *Specific Visa Service :* ${visaServiceLabels[selectedVisaService] || selectedVisaService}\n` 
         : '') +
       `📝 *Message :* ${data.message || 'No additional message'}\n\n` +
       `Want to know more? Visit: https://skyworld.go-bd.com`;
@@ -361,34 +374,69 @@ const ContactForm = () => {
           )}
         </div>
         {selectedServices.includes('Visa Processing Services') && (
-        <div className="mt-4">
-          <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
-            <FaAsterisk className='text-red-500 text-sm pe-2' />
-            <span className='font-extrabold'>Visa Services</span>
-            <TooltipButton content={<p>Select the specific visa service you're interested in</p>} />
-          </label>
-          <select
-            {...register('visaService')}
-            value={selectedVisaService}
-            onChange={(e) => setSelectedVisaService(e.target.value)}
-            className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="">Select Visa Service</option>
-            {Object.entries(visaServiceOptions).map(([group, options]) => (
-              <optgroup key={group} label={group}>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
+                <FaAsterisk className='text-red-500 text-sm pe-2' />
+                <span className='font-extrabold'>Visa Service Type</span>
+                <TooltipButton content={<p>Select the type of visa service you're interested in</p>} />
+              </label>
+              <select
+                {...register('visaServiceType')}
+                value={selectedVisaServiceType}
+                onChange={(e) => {
+                  setSelectedVisaServiceType(e.target.value);
+                  // Reset specific visa service when type changes
+                  setSelectedVisaService('');
+                  setValue('visaService', '');
+                }}
+                className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">Select Visa Service Type</option>
+                {Object.keys(visaServiceOptions).map((type) => (
+                  <option key={type} value={type}>
+                    {type}
                   </option>
                 ))}
-              </optgroup>
-            ))}
-          </select>
-          {errors.visaService && (
-            <p className="text-red-500 ps-4 text-[10px]">{errors.visaService.message}</p>
-          )}
-        </div>
-      )}
+              </select>
+              {errors.visaServiceType && (
+                <p className="text-red-500 ps-4 text-[10px]">{errors.visaServiceType.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
+                <FaAsterisk className='text-red-500 text-sm pe-2' />
+                <span className='font-extrabold'>Specific Visa Service</span>
+                <TooltipButton content={<p>Select the specific visa service you're interested in</p>} />
+              </label>
+              <select
+                {...register('visaService')}
+                value={selectedVisaService}
+                onChange={(e) => setSelectedVisaService(e.target.value)}
+                disabled={!selectedVisaServiceType}
+                className={`mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 
+                  ${!selectedVisaServiceType ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <option value="">
+                  {selectedVisaServiceType 
+                    ? 'Select Specific Visa Service' 
+                    : 'Select Visa Service Type First'}
+                </option>
+                {selectedVisaServiceType && 
+                  visaServiceOptions[selectedVisaServiceType].map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))
+                }
+              </select>
+              {errors.visaService && (
+                <p className="text-red-500 ps-4 text-[10px]">{errors.visaService.message}</p>
+              )}
+            </div>
+          </div>
+        )}
 
         <div>
           <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
