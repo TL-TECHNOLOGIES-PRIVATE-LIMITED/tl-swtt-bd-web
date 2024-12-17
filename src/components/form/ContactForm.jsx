@@ -27,6 +27,32 @@ const servicesOptions = [
   "Transportation Services"
 ];
 
+const visaServiceOptions = {
+  'Visiting Visa': [
+    { value: 'uae-visiting', label: 'UAE' },
+    { value: 'saudi-visiting', label: 'Saudi Arabia' },
+    { value: 'oman-visiting', label: 'Oman' },
+    { value: 'kuwait-visiting', label: 'Kuwait' }
+  ],
+  'Global Visa Services': [
+    { value: 'uk-global', label: 'UK' },
+    { value: 'usa-global', label: 'USA' },
+    { value: 'schengen-global', label: 'Schengen' },
+    { value: 'canada-global', label: 'Canada' },
+    { value: 'australia-global', label: 'Australia' },
+    { value: 'russia-global', label: 'Russia' },
+    { value: 'malaysia-global', label: 'Malaysia' },
+    { value: 'singapore-global', label: 'Singapore' },
+    { value: 'egypt-global', label: 'Egypt' },
+    { value: 'sri-lanka-global', label: 'Sri Lanka' },
+    { value: 'turkey-global', label: 'Turkey' },
+    { value: 'armenia-global', label: 'Armenia' },
+    { value: 'azerbaijan-global', label: 'Azerbaijan' }
+  ],
+  'Job Only': [
+    { value: 'uae-job', label: 'UAE' }
+  ]
+};
 const schema = yup.object().shape({
   name: yup
     .string()
@@ -44,9 +70,7 @@ const schema = yup.object().shape({
     .required('Phone number is required')
     .matches(/^\+?[1-9]\d{1,14}$/, 'Phone number is not valid'),
 
-  country: yup
-    .string()
-    .required('Country is required'),
+ 
 
   highestEducation: yup
     .string()
@@ -59,7 +83,13 @@ const schema = yup.object().shape({
   preferredServices: yup.array().min(1, 'At least one service must be selected').required('Services are required'),
 
   message: yup.string().optional(),
+  visaService: yup.string().when('preferredServices', {
+    is: (services) => services && services.includes('Visa Processing Services'),
+    then: () => yup.string().required('Please select a visa service'),
+    otherwise: () => yup.string().optional()
+  })
 });
+
 const ContactForm = () => {
   const { register, control, handleSubmit, formState: { errors }, watch, setValue } = useForm({
     resolver: yupResolver(schema)
@@ -68,9 +98,10 @@ const ContactForm = () => {
   const [phone, setPhone] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedVisaService, setSelectedVisaService] = useState('');
+
   const message = watch('message', '');
-  const fromDate = watch('fromDate');
-  const toDate = watch('toDate');
+  const preferredServices = watch('preferredServices');
 
   const handleServiceChange = (event) => {
     const value = event.target.value;
@@ -88,41 +119,71 @@ const ContactForm = () => {
 
     setSelectedServices(updatedServices);
     setValue('preferredServices', updatedServices);
-  };
 
+    // Reset visa service if Visa Processing Services is not selected
+    if (!updatedServices.includes('Visa Processing Services')) {
+      setSelectedVisaService('');
+      setValue('visaService', '');
+    }
+  };
   const removeService = (service) => {
-    setSelectedServices(selectedServices.filter(item => item !== service));
+    setSelectedServices(selectedServices.filter(item => item !== service));
   };
-
   const onSubmit = (data) => {
     setShowAlert(true); // Show alert on form submission
-
-    // const formattedFromDate = format(new Date(data.fromDate), 'dd MMM yyyy');
-    // const formattedToDate = format(new Date(data.toDate), 'dd MMM yyyy');
-
-    const whatsappMessage =
-    `🌟 *Enquiry* 🌟\n\n` +
-    `👤 *Name :* ${data.name}\n` +
-    `📞 *Email :* ${data.email || 'Nil'}\n` +
-    `📞 *Phone :* +${phone}\n` +
-    `🌍 *Country :* ${data.country}\n` +
-    `🎓 *Highest Education :* ${data.highestEducation || 'Nil'}\n` +
-    // `👥 *Number of Travellers :* ${data.numberOfPersons}\n` +
-    // `📅 *Travel Dates :* ${formattedFromDate} to ${formattedToDate}\n` +
-    `✈️ *Type of Travel :* ${data.typeOfTravel || 'Nil'}\n` +
-    `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
-    `📝 *Message :* ${data.message || 'No additional message'}\n\n` +
-    `Want to know more? Visit: https://skyworld.go-bd.com`;
   
-
+    const submissionData = { ...data };
+  
+    if (selectedServices.includes('Visa Processing Services')) {
+      submissionData.visaService = selectedVisaService;
+    }
+  
+    // Create a mapping for visa service labels
+    const visaServiceLabels = {
+      'uae-visiting': 'UAE Visiting Visa',
+      'saudi-visiting': 'Saudi Arabia Visiting Visa',
+      'oman-visiting': 'Oman Visiting Visa',
+      'kuwait-visiting': 'Kuwait Visiting Visa',
+      'uk-global': 'UK Global Visa',
+      'usa-global': 'USA Global Visa',
+      'schengen-global': 'Schengen Global Visa',
+      'canada-global': 'Canada Global Visa',
+      'australia-global': 'Australia Global Visa',
+      'russia-global': 'Russia Global Visa',
+      'malaysia-global': 'Malaysia Global Visa',
+      'singapore-global': 'Singapore Global Visa',
+      'egypt-global': 'Egypt Global Visa',
+      'sri-lanka-global': 'Sri Lanka Global Visa',
+      'turkey-global': 'Turkey Global Visa',
+      'armenia-global': 'Armenia Global Visa',
+      'azerbaijan-global': 'Azerbaijan Global Visa',
+      'uae-job': 'UAE Job Visa'
+    };
+  
+    const whatsappMessage =
+      `🌟 *Enquiry* 🌟\n\n` +
+      `👤 *Name :* ${data.name}\n` +
+      `📞 *Email :* ${data.email || 'Nil'}\n` +
+      `📞 *Phone :* +${phone}\n` +
+      // `🌍 *Country :* ${data.country}\n` +
+      `🎓 *Highest Education :* ${data.highestEducation || 'Nil'}\n` +
+      `✈️ *Type of Travel :* ${data.typeOfTravel || 'Nil'}\n` +
+      `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
+      // Add Visa Service details if selected
+      (selectedServices.includes('Visa Processing Services') 
+        ? `✈️ *Visa Service :* ${visaServiceLabels[selectedVisaService] || selectedVisaService}\n` 
+        : '') +
+      `📝 *Message :* ${data.message || 'No additional message'}\n\n` +
+      `Want to know more? Visit: https://skyworld.go-bd.com`;
+  
     const url = `https://api.whatsapp.com/send?phone=919446004261&text=${encodeURIComponent(whatsappMessage)}`;
-
-    // Show alert for 2 seconds, then open WhatsApp
+  
     setTimeout(() => {
-      setShowAlert(false); // Hide alert
-      window.open(url, '_blank'); // Open WhatsApp
+      setShowAlert(false);
+      window.open(url, '_blank');
     }, 2000);
   };
+
   const today = format(startOfToday(), 'yyyy-MM-dd');
   return (
     <div className="custom-scrollbar p-4 w-full h-full backdrop-blur-xl text-xs overflow-y-auto text-black bg-white">
@@ -187,7 +248,7 @@ const ContactForm = () => {
             />
             {errors.phoneNumber && <p className='text-red-500 ps-4 text-[10px]'>{errors.phoneNumber.message}</p>}
           </div>
-          <div>
+          {/* <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-red-500 text-sm pe-2' /><span className='font-extrabold '>Country</span>
               <TooltipButton content={<p>Select your country.</p>} />
@@ -203,9 +264,7 @@ const ContactForm = () => {
               )}
             />
             {errors.country && <p className='text-red-500 ps-4 text-[10px]'>{errors.country.message}</p>}
-          </div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          </div> */}
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-white text-sm pe-2' />
@@ -221,6 +280,9 @@ const ContactForm = () => {
             </select>
             {errors.highestEducation && <p className='text-red-500 ps-4 text-[10px]'>{errors.highestEducation.message}</p>}
           </div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-1 gap-4">
+          
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className='text-white text-sm pe-2' />
@@ -298,10 +360,39 @@ const ContactForm = () => {
             <p className="text-red-500 ps-4 text-[10px]">{errors.preferredServices.message}</p>
           )}
         </div>
+        {selectedServices.includes('Visa Processing Services') && (
+        <div className="mt-4">
+          <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
+            <FaAsterisk className='text-red-500 text-sm pe-2' />
+            <span className='font-extrabold'>Visa Services</span>
+            <TooltipButton content={<p>Select the specific visa service you're interested in</p>} />
+          </label>
+          <select
+            {...register('visaService')}
+            value={selectedVisaService}
+            onChange={(e) => setSelectedVisaService(e.target.value)}
+            className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Select Visa Service</option>
+            {Object.entries(visaServiceOptions).map(([group, options]) => (
+              <optgroup key={group} label={group}>
+                {options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+          {errors.visaService && (
+            <p className="text-red-500 ps-4 text-[10px]">{errors.visaService.message}</p>
+          )}
+        </div>
+      )}
 
         <div>
           <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
-             <span className='font-extrabold '>Message (Optional)</span>
+            <span className='font-extrabold '>Message (Optional)</span>
             <TooltipButton content={<p>Let us know if you have any special requests or additional details regarding your booking.</p>} />
             <span className="text-blue-500 px-4 font-normal">
               {message.length}/100 letters left
@@ -320,6 +411,9 @@ const ContactForm = () => {
             <img src={mapIcon} alt="map" className='h-10 w-10' />
             <div className="inline-flex items-center px-3 py-1 border-2 border-black bg-black text-blue-200 rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
               Dubai
+            </div>
+            <div className="inline-flex items-center px-3 py-1 border-2 border-black bg-black text-blue-200 rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
+              Ernakulam
             </div>
             <div className="inline-flex items-center px-3 py-1 border-2 border-black bg-black text-blue-200 rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
               Trivandrum
@@ -346,7 +440,7 @@ const ContactForm = () => {
 
         <div className="flex justify-evenly items-center w-full flex-wrap text-black  ">
           <span>follow us</span>
-          
+
           <SocialMediaIcons
             icon={
               <FaGlobeAmericas
