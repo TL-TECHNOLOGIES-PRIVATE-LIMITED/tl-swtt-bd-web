@@ -15,6 +15,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import mapIcon from '../../assets/mapIcon.svg';
 import CustomAlert from '../alert/CustomAlert';
 import CountrySelector from './CountrySelector';
+import { MdAirplaneTicket } from "react-icons/md";
 
 const servicesOptions = [
   "Job Placement Assistance",
@@ -50,7 +51,10 @@ const visaServiceOptions = {
     { value: 'azerbaijan-global', label: 'Azerbaijan' }
   ],
   'Job Only': [
-    { value: 'uae-job', label: 'UAE' }
+    { value: 'Restaurant Jobs', label: ' Restaurant Jobs: (Waiter (South India), Cook (Parotta Master), Kitchen Helper, Tea, Snacks, Juicer, Sandwich, and Burger Maker)' },
+    { value: 'Supermarket Jobs', label: ' Supermarket Jobs: (Sales with Delivery Boy)' },
+    { value: 'General Jobs', label: ' General Jobs: (Electrician, Plumber, Welder, Fitter, Tile Mason, Painter, Driver (UAE License Holder), General Laborer)' },
+    { value: 'Ladies Only Jobs', label: ' Ladies Only Jobs: (Supermarket Sales, Restaurant Waitress, Beautician, Tailor, Housemaid, Home Nurse)' },
   ]
 };
 const schema = yup.object().shape({
@@ -76,20 +80,18 @@ const schema = yup.object().shape({
     .string()
     .optional(),
 
-  typeOfTravel: yup
-    .string()
-    .optional(),
+  // typeOfTravel: yup
+  //   .string()
+  //   .optional(),
 
-  preferredServices: yup.array().min(1, 'At least one service must be selected').required('Services are required'),
+  // preferredServices: yup.array().min(1, 'At least one service must be selected').required('Services are required'),
 
   message: yup.string().optional(),
-  visaServiceType: yup.string().when('preferredServices', {
-    is: (services) => services && services.includes('Visa Processing Services'),
-    then: () => yup.string().required('Please select a visa service type'),
-    otherwise: () => yup.string().optional()
-  }),
+
+
+  visaServiceType: yup.string().required(),
   
-  visaService: yup.string().when(['preferredServices', 'visaServiceType'], {
+  visaService: yup.string().when([ 'visaServiceType'], {
     is: (services, visaServiceType) => 
       services && services.includes('Visa Processing Services') && visaServiceType,
     then: () => yup.string().required('Please select a specific visa service'),
@@ -179,17 +181,17 @@ const ContactForm = () => {
       `📞 *Phone :* +${phone}\n` +
       // `🌍 *Country :* ${data.country}\n` +
       `🎓 *Highest Education :* ${data.highestEducation || 'Nil'}\n` +
-      `✈️ *Type of Travel :* ${data.typeOfTravel || 'Nil'}\n` +
-      `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
+      // `✈️ *Type of Travel :* ${data.typeOfTravel || 'Nil'}\n` +
+      // `🔧 *Preferred Services :* ${data.preferredServices.join(', ') || 'No services selected'}\n` +
       // Add Visa Service details if selected
-      (selectedServices.includes('Visa Processing Services') 
-        ? `✈️ *Visa Service Type :* ${selectedVisaServiceType}\n` +
+      
+         `✈️ *Visa Service Type :* ${selectedVisaServiceType}\n` +
           `✈️ *Specific Visa Service :* ${visaServiceLabels[selectedVisaService] || selectedVisaService}\n` 
-        : '') +
+        +
       `📝 *Message :* ${data.message || 'No additional message'}\n\n` +
       `Want to know more? Visit: https://skyworld.go-bd.com`;
   
-    const url = `https://api.whatsapp.com/send?phone=919446004261&text=${encodeURIComponent(whatsappMessage)}`;
+    const url = `https://api.whatsapp.com/send?phone=919446015346&text=${encodeURIComponent(whatsappMessage)}`;
   
     setTimeout(() => {
       setShowAlert(false);
@@ -294,7 +296,7 @@ const ContactForm = () => {
             {errors.highestEducation && <p className='text-red-500 ps-4 text-[10px]'>{errors.highestEducation.message}</p>}
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-1 gap-4">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-1 gap-4">
           
           <div>
             <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
@@ -310,9 +312,9 @@ const ContactForm = () => {
             </select>
             {errors.typeOfTravel && <p className='text-red-500 ps-4 text-[10px]'>{errors.typeOfTravel.message}</p>}
           </div>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           <label className="relative flex items-center justify-between">
             <div className="flex items-center gap-1 text-xs font-bold text-gray-700 ps-2">
               <FaAsterisk className="text-red-500 text-sm pe-2" />
@@ -372,8 +374,8 @@ const ContactForm = () => {
           {errors.preferredServices && (
             <p className="text-red-500 ps-4 text-[10px]">{errors.preferredServices.message}</p>
           )}
-        </div>
-        {selectedServices.includes('Visa Processing Services') && (
+        </div> */}
+        { (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="gap-1 flex items-center text-xs font-bold text-gray-700 ps-2">
@@ -392,7 +394,7 @@ const ContactForm = () => {
                 }}
                 className="mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="">Select Visa Service Type</option>
+                <option value="" className='font-bold'>Select Visa Service Type</option>
                 {Object.keys(visaServiceOptions).map((type) => (
                   <option key={type} value={type}>
                     {type}
@@ -418,7 +420,7 @@ const ContactForm = () => {
                 className={`mt-1 block w-full border-stone-400 border outline-none text-stone-950 p-2 rounded-full shadow-sm focus:ring-blue-500 focus:border-blue-500 
                   ${!selectedVisaServiceType ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                <option value="">
+                <option value="" className='font-bold'>
                   {selectedVisaServiceType 
                     ? 'Select Specific Visa Service' 
                     : 'Select Visa Service Type First'}
@@ -454,7 +456,7 @@ const ContactForm = () => {
           />
         </div>
 
-        <div className="w-full flex justify-between flex-wrap items-center py-2">
+        <div className="w-full flex justify-between flex-wrap-reverse items-center py-2">
           <div className="flex flex-wrap gap-2 items-center">
             <img src={mapIcon} alt="map" className='h-10 w-10' />
             <div className="inline-flex items-center px-3 py-1 border-2 border-black bg-black text-blue-200 rounded-full text-xs shadow-sm transition-colors duration-300 cursor-default">
@@ -468,7 +470,7 @@ const ContactForm = () => {
             </div>
           </div>
           <button
-            className="overflow-hidden relative w-28 h-10 bg-black text-white border-none rounded-md text-base font-bold cursor-pointer group"
+            className="overflow-hidden relative w-28 h-10 bg-red-600 text-white border-none rounded-md text-base font-bold cursor-pointer group"
           >
             Lets Talk !
             <span
@@ -485,7 +487,7 @@ const ContactForm = () => {
             >Lets Talk !</span>
           </button>
         </div>
-
+<p className='bg-white text-blue-700 sm:text-base text-xs font-bold p-2 w-full  rounded-lg text-center shadow-sm flex justify-center items-center gap-2' style={{boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px"}} > <MdAirplaneTicket className='text-3xl  text-black'/> Visa + Ticket + Quick Processing in 10 Days!</p>
         <div className="flex justify-evenly items-center w-full flex-wrap text-black  ">
           <span>follow us</span>
 
