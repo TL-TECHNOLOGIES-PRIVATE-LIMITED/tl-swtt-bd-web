@@ -57,7 +57,7 @@ const CustomAlert = () => {
             icon={
               <FaWhatsapp className=" md:text-2xl text-xl transition-all duration-300 ease-in-out  text-green-500" />
             }
-            link={"https://api.whatsapp.com/send/?phone=%2B918086407979&text=Hello%2C+I+am+interested+to+know+more+about+your+service.&type=phone_number&app_absent=0"}
+            link={"https://api.whatsapp.com/send/?phone=%2B919446015346&text=Hello%2C+I+am+interested+to+know+more+about+your+service.&type=phone_number&app_absent=0"}
           />
             {/* Bouncing Dots */}
             <div className="flex gap-1">

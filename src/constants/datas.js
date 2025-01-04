@@ -28,7 +28,7 @@ export const services = [
     "image": specialOffer,
     "heading": "Special Offer: Limited-Time Discount!",
     // "Tagline": "Embark on a Culinary Journey.",
-    "paragraph": "Book now and get ₹5,000 off on job placement packages. Offer valid till [date]."
+    "paragraph": "Book now and get ₹5,000 off on job placement packages."
   },
   {
     "image": successStories,

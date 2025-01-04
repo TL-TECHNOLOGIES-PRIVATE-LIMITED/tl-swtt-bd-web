@@ -19,7 +19,7 @@ export const faqData = [
   },
   {
     question: "How can I contact SkyWorld?",
-    answer: "You can reach us at +91 9446004261 or via email at jbskyworld@gmail.com.",
+    answer: "You can reach us at 91 94460 15346  or via email at jbskyworld@gmail.com.",
     keywords: ["contact", "SkyWorld", "phone number", "email"]
   },
   {
